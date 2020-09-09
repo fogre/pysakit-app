@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components'
+import AllTimetables from './components/AllTimetables'
+import Footer from './components/Footer'
 
-function App() {
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Sdiv>
+      <Sheader>
+        <SlogoImg src='./pysakit-app-logo.png' alt='logo' />
+      </Sheader>  
+      <AllTimetables />
+      <Footer />
+    </Sdiv>
   );
 }
+
+const Sdiv = styled.div`
+  margin: auto;
+  max-width: 900px;
+  padding: 5px;
+`
+const Sheader = styled.div`
+ text-align: center; 
+ margin: 0.1em 0 5em 0;
+ padding: 0;
+`
+const SlogoImg = styled.img`
+  width: 100px;
+`
 
 export default App;
