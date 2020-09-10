@@ -4,14 +4,14 @@ import { Simg } from '../../ui/styledComponents'
 
 const SingleTimetableHeader = ({ name, edit, setEdit }) => {
   return(
-    <Sflex>
+    <Sflex id={name}>
+      <h2>{name}</h2>
       <SeditButton onClick={() => setEdit(!edit)}>
         {edit
           ? <Simg src='/close.png' alt='close' />
           : <Simg src='/edit.png' alt='edit' />
         }
       </SeditButton>
-       <h2>{name}</h2>
     </Sflex>
   )
 }
@@ -24,6 +24,7 @@ const Sflex = styled.div`
 const SeditButton = styled.button`
   background-color: transparent;
   border: none;
+  margin-left: auto;
   padding: 0.1em 0.1 0 0.3em;
 `
 export default SingleTimetableHeader

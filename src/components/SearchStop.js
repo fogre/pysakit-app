@@ -13,9 +13,9 @@ const SearchStop = props => {
   })
   const disabled = (nameChanged && stopName.length > 3) ? false : true
 
-  const focusThis = () => {
+  const focusThis = (id) => {
     if (!props.name && window.innerWidth < 900)
-      document.getElementById('searchInput').scrollIntoView()
+      document.getElementById(id).scrollIntoView()
   }
   
   const handleChange = e => {
@@ -29,9 +29,13 @@ const SearchStop = props => {
       return
     }
     if (props.addTimetable(stopName)) {
-      document.getElementById('searchInput').blur();  
+      document.getElementById('searchInput').blur();
       setShowError(null)
       setStopName('')
+      setTimeout(() => {
+        if (document.getElementById(stopName))
+          focusThis(stopName)
+      }, 100)
     } else {
       setShowError(`${stopName} already exists`)
     }
@@ -46,15 +50,15 @@ const SearchStop = props => {
   return(
     <div>
       {showError 
-        ? <SDerrorMessage>{showError}</SDerrorMessage>
+        ? <SerrorMessage>{showError}</SerrorMessage>
         : null
       }
-      <SDsearchContainer>  
-        <SDsearchForm autoComplete='off' autocomplete='off' onSubmit={handleSearchStop}>
-          <SDformInput
+      <SsearchContainer>  
+        <SsearchForm autoComplete='off' autocomplete='off' onSubmit={handleSearchStop}>
+          <SformInput
             id='searchInput'
             inputMode='search'
-            onFocus={focusThis}
+            onFocus={() => focusThis('searchInput')}
             onChange={handleChange}
             placeholder='Enter stop name, ie. "rautatien"'
             type='search'
@@ -67,21 +71,21 @@ const SearchStop = props => {
               disabled={disabled}
             />
           </SsubmitButton>
-        </SDsearchForm>
-      </SDsearchContainer> 
+        </SsearchForm>
+      </SsearchContainer> 
     </div>   
   )
 }
 
-const SDsearchContainer = styled.div`
+const SsearchContainer = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
 `
-const SDerrorMessage = styled.p`
+const SerrorMessage = styled.p`
   margin: 0.3em;
 `
-const SDsearchForm = styled.form`
+const SsearchForm = styled.form`
   align-items: center; 
   border-radius: 1.2em;
   border: 1px solid #5ab3ff;
@@ -97,7 +101,7 @@ const SDsearchForm = styled.form`
     box-shadow: 0px 0px 5px 1px rgba(50,50,50,0.4);
   }
 `
-const SDformInput = styled.input`
+const SformInput = styled.input`
   border: none;
   margin: 0.5em;
   width: 80%

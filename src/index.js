@@ -4,8 +4,8 @@ import {
   ApolloClient, HttpLink, InMemoryCache
 } from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
-import './index.css';
-import App from './App';
+import './index.css'
+import App from './App'
 
 const httpLink = new HttpLink({ 
   uri: 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
